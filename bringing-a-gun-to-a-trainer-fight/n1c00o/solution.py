@@ -2,9 +2,7 @@ from math import sqrt
 
 
 def norm(vec):
-    """
-    Return the norm of a vector
-    """
+    # norm of a vector AB = distance between A and B = sqrt((xb - xa)**2 + (yb - ya)**2)
     return sqrt(vec[0]**2 + vec[1]**2)
 
 
@@ -33,6 +31,40 @@ def solution(dimensions, your_position, trainer_position, distance):
     # After making our mirrors and getting our vectors, we calculate the norm of these and if the norm is lesser than distance
     # then it is a valid one
 
+    # get mirrors
+    mirrors = []
+    # todo
+
+    # calculate vectors using our mirrors and inverting coordinates on a mirror
+    vectors = []
+    # todo
+
+    # validate our vectors
+    # Valid vectors norms are lesser or equal to distance (constraints of beam)
+    # Valid vectors aren't colinear to shortest_vec (because if it is,
+    # either the beam will go through trainer before reaching the mirrored trainer,
+    # either the beam will bounce on the wall and touch yourself before reaching the trainer)
     num_valid_vec = 0
+
+    for vec in vectors:
+        # if the vector equals shortest_vec, we avoid any computation on it
+        if vec == shortest_vec:
+            num_valid_vec += 1
+            continue
+
+        # Check if the norm of the vector <= distance or not
+        if norm(vec) > distance:
+            continue
+
+        # verify the vector is not colinear with shortest_vec
+        # Two vectors (here u and v) are colinears if there is a real number k we can use to write u = kv
+        # In other term, they are colinears if there is a relation of proportionality between vector's coordinates
+        k = shortest_vec[0] / vec[0]
+        if vec[1] * k == shortest_vec[1]:
+            # if true, then vectors are colinear
+            continue
+
+        # if the vector passes our tests, then it is valid
+        num_valid_vec += 1
 
     return num_valid_vec
