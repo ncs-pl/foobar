@@ -1,70 +1,72 @@
-from math import sqrt
+import math
+
+# My biggest quality is being able to search on google :)
 
 
-def norm(vec):
-    # norm of a vector AB = distance between A and B = sqrt((xb - xa)**2 + (yb - ya)**2)
-    return sqrt(vec[0]**2 + vec[1]**2)
+def get_mirror_coordinates(size, pos, rel_cg, layer_count):
+    [w, h] = size
+    (px, py) = pos
+
+    dxR = (w-px)*2
+    dxL = px*2
+    x = [px-rel_cg[0]]*(layer_count*2+1)
+    for i in range(layer_count+1, layer_count*2+1):
+        x[i] = x[i-1]+dxR if (i-layer_count-1) % 2 == 0 else x[i-1]+dxL
+    for i in range(layer_count-1, -1, -1):
+        x[i] = x[i+1]-dxL if (layer_count-1-i) % 2 == 0 else x[i+1]-dxR
+
+    dyU = (h-py)*2  # 275-100=175*2=350
+    dyD = py*2
+    y = [py-rel_cg[1]]*(layer_count*2+1)
+    for i in range(layer_count+1, layer_count*2+1):
+        y[i] = y[i-1]+dyU if (i-layer_count-1) % 2 == 0 else y[i-1]+dyD
+    for i in range(layer_count-1, -1, -1):
+        y[i] = y[i+1]-dyD if (layer_count-1-i) % 2 == 0 else y[i+1]-dyU
+
+    return x, y
 
 
 def solution(dimensions, your_position, trainer_position, distance):
-    # shortest vector between you and the trainer
-    shortest_vec = [trainer_position[0] - your_position[0],
-                    trainer_position[1] - your_position[1]]
-    shortest_vec_norm = norm(shortest_vec)
+    player_pos = (your_position[0], your_position[1])
+    trainer_pos = (trainer_position[0], trainer_position[1])
+    min_d = min(dimensions)
+    layer_count = (distance//min_d)+1
 
-    # If the norm of the sortest vector between you and the trainer is greater than distance,
-    # then there is no solution
-    if shortest_vec_norm > distance:
-        return 0
-    # if the norm of the shortest vector is equal to the distance, then there is only this solution
-    elif shortest_vec_norm == distance:
-        return 1
+    px, py = get_mirror_coordinates(
+        dimensions, player_pos, player_pos, layer_count)
+    tx, ty = get_mirror_coordinates(
+        dimensions, trainer_pos, player_pos, layer_count)
 
-    # Beginning of the algorithm...
-    # The goal is to mirror the room given thanks to dimensions and then calculate all vectors between `your` in the original room
-    # and the replicated trainer.
-    # We make replicas using x, y, d and e where
-    # x is the horizontal axis
-    # y is the vertical axis
-    # d is the line parallel to x which goes through (0; dimensions[1]) to (dimensions[0]; dimensions[1])
-    # e is the line parallel to y which goes through (dimensions[0]; 0) to (dimensions[0]; dimensions[1])
-    # After making our mirrors and getting our vectors, we calculate the norm of these and if the norm is lesser than distance
-    # then it is a valid one
+    angle_dist = {}
 
-    # get mirrors
-    mirrors = []
-    # todo
+    for _x in px:
+        for _y in py:
+            if (_x == 0 and _y == 0):
+                continue
+            d = math.hypot(_y, _x)
+            if d <= distance:
+                beam = math.atan2(_y, _x)
+                if beam in angle_dist:
+                    if d < angle_dist[beam]:
+                        angle_dist[beam] = d
+                else:
+                    angle_dist[beam] = d
 
-    # calculate vectors using our mirrors and inverting coordinates on a mirror
-    vectors = []
-    # todo
-
-    # validate our vectors
-    # Valid vectors norms are lesser or equal to distance (constraints of beam)
-    # Valid vectors aren't colinear to shortest_vec (because if it is,
-    # either the beam will go through trainer before reaching the mirrored trainer,
-    # either the beam will bounce on the wall and touch yourself before reaching the trainer)
-    num_valid_vec = 0
-
-    for vec in vectors:
-        # if the vector equals shortest_vec, we avoid any computation on it
-        if vec == shortest_vec:
-            num_valid_vec += 1
-            continue
-
-        # Check if the norm of the vector <= distance or not
-        if norm(vec) > distance:
-            continue
-
-        # verify the vector is not colinear with shortest_vec
-        # Two vectors (here u and v) are colinears if there is a real number k we can use to write u = kv
-        # In other term, they are colinears if there is a relation of proportionality between vector's coordinates
-        k = shortest_vec[0] / vec[0]
-        if vec[1] * k == shortest_vec[1]:
-            # if true, then vectors are colinear
-            continue
-
-        # if the vector passes our tests, then it is valid
-        num_valid_vec += 1
-
-    return num_valid_vec
+    res = set()
+    for _x in tx:
+        for _y in ty:
+            d = math.hypot(_y, _x)
+            if d <= distance:
+                beam = math.atan2(_y, _x)
+                if beam in angle_dist:
+                    if d < angle_dist[beam]:
+                        angle_dist[beam] = d
+                        # res.add((_x,_y))
+                        res.add(beam)
+                        # print(f'({player_pos[0]+_x},{player_pos[1]+_y})')
+                else:
+                    angle_dist[beam] = d
+                    res.add(beam)
+                    # print(f'({player_pos[0]+_x},{player_pos[1]+_y})')
+    # print(res)
+    return len(res)
