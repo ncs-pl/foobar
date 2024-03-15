@@ -1,0 +1,78 @@
+
+           .----------------.  .----------------.  .----------------.
+          | .--------------. || .--------------. || .--------------. |
+          | |  _________   | || |     ____     | || |     ____     | |
+          | | |_   ___  |  | || |   .'    `.   | || |   .'    `.   | |
+          | |   | |_  \_|  | || |  /  .--.  \  | || |  /  .--.  \  | |
+          | |   |  _|      | || |  | |    | |  | || |  | |    | |  | |
+          | |  _| |_       | || |  \  `--'  /  | || |  \  `--'  /  | |
+          | | |_____|      | || |   `.____.'   | || |   `.____.'   | |
+          | |              | || |              | || |              | |
+          | '--------------' || '--------------' || '--------------' |
+           '----------------'  '----------------'  '----------------'
+           .----------------.  .----------------.  .----------------.
+          | .--------------. || .--------------. || .--------------. |
+          | |   ______     | || |      __      | || |  _______     | |
+          | |  |_   _ \    | || |     /  \     | || | |_   __ \    | |
+          | |    | |_) |   | || |    / /\ \    | || |   | |__) |   | |
+          | |    |  __'.   | || |   / ____ \   | || |   |  __ /    | |
+          | |   _| |__) |  | || | _/ /    \ \_ | || |  _| |  \ \_  | |
+          | |  |_______/   | || ||____|  |____|| || | |____| |___| | |
+          | |              | || |              | || |              | |
+          | '--------------' || '--------------' || '--------------' |
+           '----------------'  '----------------'  '----------------'
+
+
+                    GOOGLE FOOBAR: My winning participatiosn
+                         to the Google FooBar challenge
+
+
+
+   Why Making it Public?
+
+At first, this repository was left private, to avoid releasing solutions to
+other participants.  However, since Google *unofficially* announced the death
+of the project to April 1st, 2024, I decided to make it public.
+
+I do hope the solutions here may someday be helpful (even to myself), or
+inspire me to make something similar ;).
+
+
+   What is Google FooBar?
+
+Google FooBar was a secret recruiting program by Google.  It was a series of
+complex computer science problems, which were presented to the user in a cool
+storyline.  The user was given a time limit to solve the problems, and the
+user's performance was evaluated by Google.  If the user did well, they would
+be invited to apply for a job at Google.
+
+(For more information, see the Wikipedia page:
+https://en.wikipedia.org/wiki/Google_Foobar).
+
+> For those wondering, I did receive an offer, but I didn't accept it, I'm a
+> true sigma male.
+
+
+   Where?
+
+Google FooBar was hosted online at https://foobar.withgoogle.com.  While not
+officially announced, it was invite-only.
+
+
+   Legal
+
+Solutions proposed in the code are the intellectual property of their authors.
+The storyline and the inputs for the questions are the creation and artistic
+work of Google LLC (Google), a subsidiary of Alphabet Inc.  The author of this
+repository is not affiliated with Google LLC, and the solutions proposed here
+are not endorsed by Google LLC.  The author of this repository does not claim
+any rights over the storyline or the inputs for the questions, and the
+rest of the content is not made public for commercial purposes.
+
+You are not granted any right to read, copy, use, modify, distribute, or
+leverage the content of this repository without explicit written permission
+from ALL the authors, except for the terms described in GitHub's Terms Of
+Service to public viewing.
+
+Failure to comply with these terms will result in legal action taken directly,
+with no regard to good faith.  Be evil.
